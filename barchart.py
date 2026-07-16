@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 
-# Categorical Bar Chart
+
 
 products = ['Product A', 'Product B', 'Product C', 'Product D']
 inventory = [45, 88, 21, 63]
