@@ -22,7 +22,7 @@ X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
 
 # Create k-NN classifier
-k = 5
+k=int(input("Enter the K value:"))
 model = KNeighborsClassifier(n_neighbors=k)
 
 # Train the model
@@ -44,7 +44,7 @@ print("\nConfusion Matrix:")
 print(confusion_matrix(y_test, y_pred))
 
 # Predict a new flower
-new_flower = [[5.1, 3.5, 1.4, 0.2]]
+new_flower = [[3.1, 4.5, 2.4, 0.5]]
 new_flower_scaled = scaler.transform(new_flower)
 prediction = model.predict(new_flower_scaled)
 
