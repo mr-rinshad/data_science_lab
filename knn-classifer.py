@@ -4,25 +4,33 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score, classification_report
 
-# 1. Create a dummy dataset (Features: Age, Salary -> Label: Will Buy Product)
-X = np.array([[25, 40000], [35, 60000], [45, 80000], [20, 20000], [55, 120000], [60, 140000]])
-y = np.array([0, 0, 1, 0, 1, 1])
+# Larger dummy dataset
+X = np.array([
+    [22,25000],[25,30000],[28,35000],[30,40000],[35,50000],
+    [40,60000],[45,70000],[50,90000],[55,100000],[60,120000]
+])
 
-# 2. Split dataset into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+# 0 = No, 1 = Yes
+y = np.array([0,0,0,0,0,1,1,1,1,1])
 
-# 3. Feature Scaling (Crucial for KNN as it relies on distance metrics)
+# Split dataset
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42, stratify=y
+)
+
+# Feature scaling
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
 
-# 4. Initialize and train the KNN Classifier (K=3)
+# KNN Classifier
 knn = KNeighborsClassifier(n_neighbors=3)
 knn.fit(X_train, y_train)
 
-# 5. Make predictions
+# Prediction
 y_pred = knn.predict(X_test)
 
-# 6. Evaluate the model
-print(f"Accuracy Score: {accuracy_score(y_test, y_pred)}")
-print("\nClassification Report:\n", classification_report(y_test, y_pred))
+# Evaluation
+print("Accuracy:", accuracy_score(y_test, y_pred))
+print("\nClassification Report:\n")
+print(classification_report(y_test, y_pred))
